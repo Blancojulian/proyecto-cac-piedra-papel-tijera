@@ -31,8 +31,13 @@ const pedirOpcion = () => {
     try {
         do {
             respuesta = prompt('Ingrese una opcion');
+
+            if (respuesta == null) {
+                break;
+            }
     
             respuesta = typeof respuesta === 'string' ? respuesta.toUpperCase() : respuesta;
+
 
             switch (respuesta) {
                 case OPCIONES.TIJERA:
@@ -40,14 +45,12 @@ const pedirOpcion = () => {
                 case OPCIONES.PIEDRA:
                     opcion = respuesta;
                     break;
-                case null:
-                    opcion = respuesta;
-                    break
                 default:
+                    opcion = null;
                     alert('Opcion invalida');
                     break;
             }
-        } while (!opcion && opcion != null);
+        } while (!opcion);
     } catch (err) {
         console.log('Error al elegir opcion')
     }
