@@ -1,3 +1,8 @@
+import { createSound } from "./sound.js"; 
+const playSuccess = createSound('./../assets/audio/success.wav');
+const playLose = createSound('./../assets/audio/lose.wav');
+const playEmpate = createSound('./../assets/audio/empate.wav');
+
 const btnJugar = document.getElementById('btnJugar');
 const historial = document.querySelector('.historial');
 const listaHistorial = document.querySelector('.listaHistorial');
@@ -65,6 +70,7 @@ const calcularResultado = (opcionJugador, opcionMaquina) => {
 
     if(opcionJugador === opcionMaquina) {
         partida.innerText = `Empate | ${opcionJugador} - ${opcionMaquina}`;
+        playEmpate();
 
     } else if ((opcionJugador === OPCIONES.PIEDRA && opcionMaquina === OPCIONES.TIJERA) ||
         (opcionJugador === OPCIONES.PAPEL && opcionMaquina === OPCIONES.PIEDRA) ||
@@ -72,12 +78,14 @@ const calcularResultado = (opcionJugador, opcionMaquina) => {
             partida.innerText = `Humano gano, Maquina perdio | ${opcionJugador} - ${opcionMaquina}`;
             puntajeHumano++;
             divPuntajeHumano.innerText = puntajeHumano;
+            playSuccess();
 
 
     } else {
         partida.innerText = `Maquina gano, Humano perdio | ${opcionJugador} - ${opcionMaquina}`;
         puntajeMaquina++;
         divPuntajeMaquina.innerText = puntajeMaquina;
+        playLose()
 
     }
 
